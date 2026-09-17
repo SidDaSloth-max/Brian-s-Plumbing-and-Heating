@@ -80,7 +80,11 @@
     "@type": "AggregateRating",
     "ratingValue": "5.0",
     "reviewCount": "15"
-  }
+  },
+  "sameAs": [
+    "https://www.facebook.com/p/Brians-Plumbing-and-Heating-100065176592016/",
+    "https://www.yelp.com/biz/brians-plumbing-and-heating-libby-2"
+  ]
 }
 </script>
 <link rel="stylesheet" href="css/main.css">
@@ -296,16 +300,12 @@
         <p>Brian's Plumbing is proud to be rated 5.0 stars by homeowners across Libby and Lincoln County.</p>
         <a href="tel:+12064272219" class="btn-primary" onclick="trackCall('reviews_phone_button')">Call to Get Started</a>
       </div>
-      <div class="review-quotes">
-        <div class="review-quote">
-          <p>"This plumber knows his trade, very honest and reasonable."</p>
-          <div class="reviewer">&mdash; T.F.</div>
-        </div>
-        <div class="review-quote">
-          <p>"Brian was great, had a hot water tank leak on a Friday night. He came right out and fixed it."</p>
-          <div class="reviewer">&mdash; Alice C.</div>
-        </div>
+      <div class="review-carousel">
+        <button class="review-nav prev" id="reviewPrev" aria-label="Show previous reviews">&#8249;</button>
+        <div class="review-quotes" id="reviewTrack"></div>
+        <button class="review-nav next" id="reviewNext" aria-label="Show next reviews">&#8250;</button>
       </div>
+      <p class="section-sub" style="margin-top:20px;"><a href="https://www.yelp.com/biz/brians-plumbing-and-heating-libby-2" target="_blank" rel="noopener" onclick="trackOutbound('reviews_yelp_link')" style="color:var(--copper-deep); font-weight:600; text-decoration:underline;">Read all 15 reviews on Yelp &rarr;</a></p>
     </div>
   </section>
 
@@ -317,6 +317,20 @@
       <p><strong>What areas do you serve besides Libby?</strong> I regularly service Troy, the Yaak Valley, and Trego, along with the rest of Lincoln County. If you're outside that area, call and I'll let you know if I can help.</p>
       <p><strong>Are you licensed and insured?</strong> Yes — I'm a Montana Certified Master Plumber, fully licensed, bonded, and insured.</p>
       <p><strong>How much does a service call cost?</strong> It depends on the job. I'll always give you a clear estimate before starting any work, and I can usually give you a rough idea over the phone.</p>
+    </div>
+  </section>
+
+  <!-- Find Us -->
+  <section class="map-section">
+    <div class="container">
+      <h2 class="section-title">Find Us</h2>
+      <p class="section-sub">148 Manor Dr, Libby, MT 59923</p>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps?q=148+Manor+Dr,+Libby,+MT+59923&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Map showing Brian's Plumbing location in Libby, MT"></iframe>
+      </div>
+      <div style="text-align:center; margin-top:20px;">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=148+Manor+Dr,+Libby,+MT+59923" target="_blank" rel="noopener" class="btn-secondary" style="color:var(--navy-dark); border-color:var(--navy-dark); display:inline-block;" onclick="trackOutbound('map_get_directions')">Get Directions</a>
+      </div>
     </div>
   </section>
 
@@ -368,6 +382,24 @@
     </div>
   </div>
 
+
+  <div class="social-icons">
+    <a href="https://www.facebook.com/p/Brians-Plumbing-and-Heating-100065176592016/" target="_blank" rel="noopener" class="icon-fb" aria-label="Brian's Plumbing on Facebook" onclick="trackOutbound('footer_facebook')">
+      <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3H13.5V8.5c0-.9.25-1.5 1.55-1.5H16.5V4.3C16.2 4.26 15.2 4.2 14 4.2c-2.4 0-4 1.46-4 4.15V10.5H7.5v3H10V21h3.5z"/></svg>
+    </a>
+    <a href="https://www.yelp.com/biz/brians-plumbing-and-heating-libby-2" target="_blank" rel="noopener" class="icon-yelp" aria-label="Brian's Plumbing on Yelp" onclick="trackOutbound('footer_yelp')">
+      <svg viewBox="0 0 24 24"><path d="M12 2a1.8 1.8 0 0 0-1.8 1.8v6.2a1.8 1.8 0 1 0 3.6 0V3.8A1.8 1.8 0 0 0 12 2zm6.4 5.4a1.8 1.8 0 0 0-2.4-.8l-5.6 2.8a1.8 1.8 0 0 0 1.6 3.2l5.6-2.8a1.8 1.8 0 0 0 .8-2.4zM5.6 6.6a1.8 1.8 0 0 0-.8 2.4l2.8 5.6a1.8 1.8 0 0 0 3.2-1.6L8 7.4a1.8 1.8 0 0 0-2.4-.8zm.8 9.2a1.8 1.8 0 0 0-2.4.8 1.8 1.8 0 0 0 .8 2.4l5.6 2.8a1.8 1.8 0 0 0 1.6-3.2l-5.6-2.8zm13.4-.9-5.6-2.8a1.8 1.8 0 1 0-1.6 3.2l5.6 2.8a1.8 1.8 0 0 0 1.6-3.2z"/></svg>
+    </a>
+    <a href="https://nextdoor.com/pages/brians-plumbing-heating-everett-wa/" target="_blank" rel="noopener" class="icon-nextdoor" aria-label="Brian's Plumbing on Nextdoor" onclick="trackOutbound('footer_nextdoor')">
+      <svg viewBox="0 0 24 24"><path d="M12 3 3 10h2v9h5v-6h4v6h5v-9h2z"/></svg>
+    </a>
+    <a href="https://www.mapquest.com/maps?address=148+Manor+Dr&city=Libby&state=MT&zipcode=59923" target="_blank" rel="noopener" class="icon-mapquest" aria-label="Brian's Plumbing on MapQuest" onclick="trackOutbound('footer_mapquest')">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/brian-hoskins-47652814a/" target="_blank" rel="noopener" class="icon-linkedin" aria-label="Brian Hoskins on LinkedIn" onclick="trackOutbound('footer_linkedin')">
+      <span>in</span>
+    </a>
+  </div>
   <div class="footer-bottom">
     &copy; <span id="year"></span> Brian's Plumbing, Heating &amp; Mechanical. All rights reserved.
   </div>
