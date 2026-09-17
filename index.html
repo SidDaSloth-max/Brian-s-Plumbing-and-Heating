@@ -211,6 +211,20 @@
     </div>
   </section>
 
+  <!-- Hidden static form so Netlify's build bot detects every "quote" field -->
+  <form name="quote" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="tel" name="phone" />
+    <input type="email" name="email" />
+    <input type="text" name="location" />
+    <input type="checkbox" name="interest" value="Plumbing Repair" />
+    <input type="checkbox" name="interest" value="Water Heater" />
+    <input type="checkbox" name="interest" value="Heating / Furnace" />
+    <input type="checkbox" name="interest" value="Emergency" />
+    <input type="checkbox" name="interest" value="Other" />
+    <textarea name="message"></textarea>
+  </form>
+
   <!-- Request a Quote -->
   <section class="contact-form-section" id="quote">
     <div class="container">

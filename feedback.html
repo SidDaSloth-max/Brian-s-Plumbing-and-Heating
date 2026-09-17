@@ -69,6 +69,14 @@
     </div>
   </section>
 
+  <!-- Hidden static form so Netlify's build bot detects every "feedback" field -->
+  <form name="feedback" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="service" />
+    <textarea name="message"></textarea>
+  </form>
+
   <section class="contact-form-section">
     <div class="container">
       <h2 class="section-title">Feedback Form</h2>
