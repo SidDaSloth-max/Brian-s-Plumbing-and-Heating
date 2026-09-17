@@ -252,6 +252,64 @@ section { padding: 56px 20px; }
 .service-card a.card-link { color: var(--copper-deep); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
 .service-card a.card-link:hover { text-decoration: underline; }
 
+/* Photo Gallery */
+.gallery-section { background: var(--bg); }
+.carousel { position: relative; max-width: 720px; margin: 0 auto; }
+.carousel-track {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: min(50vh, 420px);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.carousel-slide-empty { color: var(--ink-muted); font-style: italic; }
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--navy-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.carousel-btn.prev { left: -12px; }
+.carousel-btn.next { right: -12px; }
+.carousel-btn:hover { background: var(--copper); color: #fff; border-color: var(--copper); }
+@media (max-width: 640px) {
+  .carousel-slide { height: 60vw; }
+  .carousel-btn { width: 38px; height: 38px; font-size: 1.4rem; }
+  .carousel-btn.prev { left: 4px; }
+  .carousel-btn.next { right: 4px; }
+}
+
 /* About teaser */
 .about-section { background: var(--navy-pale); }
 .about-section .container { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start; }

@@ -139,13 +139,38 @@ function initReviewCarousel() {
   render();
 }
 
+// Gallery carousel prev/next
+function initGalleryCarousel() {
+  var track = document.getElementById('carouselTrack');
+  var prev = document.getElementById('carouselPrev');
+  var next = document.getElementById('carouselNext');
+  if (!track || !prev || !next) return;
+
+  function step() {
+    return track.clientWidth;
+  }
+  prev.addEventListener('click', function () {
+    track.scrollBy({ left: -step(), behavior: 'smooth' });
+  });
+  next.addEventListener('click', function () {
+    track.scrollBy({ left: step(), behavior: 'smooth' });
+  });
+}
+
 function initAll() {
   initReviewCarousel();
+  initGalleryCarousel();
   initNetlifyForm(
     'contactFormEl',
     'contactFormStatus',
     "Thank you! Your message has been sent — I'll be in touch soon.",
     'Something went wrong sending your message. Please call (206) 427-2219 instead.'
+  );
+  initNetlifyForm(
+    'quoteFormEl',
+    'quoteFormStatus',
+    "Thank you! Your request has been sent — I'll be in touch soon.",
+    'Something went wrong sending your request. Please call (206) 427-2219 instead.'
   );
   initNetlifyForm(
     'feedbackFormEl',

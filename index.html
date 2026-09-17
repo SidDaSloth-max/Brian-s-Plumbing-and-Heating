@@ -102,6 +102,7 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
     <nav class="main-nav" id="mainNav">
       <a href="services.html">Services</a>
+      <a href="#gallery">Gallery</a>
       <a href="#service-areas">Service Areas</a>
       <a href="#reviews">Reviews</a>
       <a href="about.html">About</a>
@@ -190,6 +191,69 @@
       <div style="text-align:center; margin-top:36px;">
         <a href="services.html" class="btn-secondary" style="color:var(--navy-dark); border-color:var(--navy-dark);">See All Services</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Recent Job Photos</h2>
+      <p class="section-sub">A look at recent plumbing and heating work around Libby and Lincoln County.</p>
+      <div class="carousel" id="galleryCarousel">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide carousel-slide-empty">
+            <p>Photos coming soon.</p>
+          </div>
+        </div>
+        <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous photo">&#8249;</button>
+        <button class="carousel-btn next" id="carouselNext" aria-label="Next photo">&#8250;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Request a Quote -->
+  <section class="contact-form-section" id="quote">
+    <div class="container">
+      <h2 class="section-title">Request a Quote</h2>
+      <p class="section-sub">Tell me a bit about the job and I'll follow up to schedule a time or give you a quote.</p>
+      <form class="contact-form" name="quote" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="quoteFormEl">
+        <input type="hidden" name="form-name" value="quote">
+        <p class="hidden-field" aria-hidden="true">
+          <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+        <div class="form-group">
+          <label for="quote-name">Name</label>
+          <input type="text" id="quote-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="quote-phone">Phone</label>
+          <input type="tel" id="quote-phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="quote-email">Email (optional)</label>
+          <input type="email" id="quote-email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="quote-location">City / Area</label>
+          <input type="text" id="quote-location" name="location" placeholder="e.g. Libby, Troy, Yaak, Trego">
+        </div>
+        <fieldset class="form-group checkbox-fieldset">
+          <legend>What do you need?</legend>
+          <div class="checkbox-group">
+            <label class="checkbox-chip"><input type="checkbox" name="interest" value="Plumbing Repair"><span>Plumbing Repair</span></label>
+            <label class="checkbox-chip"><input type="checkbox" name="interest" value="Water Heater"><span>Water Heater</span></label>
+            <label class="checkbox-chip"><input type="checkbox" name="interest" value="Heating / Furnace"><span>Heating / Furnace</span></label>
+            <label class="checkbox-chip"><input type="checkbox" name="interest" value="Emergency"><span>Emergency</span></label>
+            <label class="checkbox-chip"><input type="checkbox" name="interest" value="Other"><span>Other</span></label>
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <label for="quote-message">Message</label>
+          <textarea id="quote-message" name="message" rows="5" placeholder="Describe what's going on."></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Request Quote</button>
+      </form>
+      <p class="form-status" id="quoteFormStatus" role="status" aria-live="polite"></p>
     </div>
   </section>
 
