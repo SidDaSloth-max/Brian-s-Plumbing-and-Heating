@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<title>Feedback | Brian's Plumbing, Libby, MT</title>
+<meta name="description" content="Share feedback about your service experience with Brian's Plumbing, Heating &amp; Mechanical in Libby, MT.">
+<link rel="canonical" href="https://www.briansplumbing.net/feedback.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Feedback | Brian's Plumbing, Libby, MT">
+<meta property="og:description" content="Share feedback about your service experience with Brian's Plumbing.">
+<meta property="og:url" content="https://www.briansplumbing.net/feedback.html">
+<meta property="og:image" content="https://www.briansplumbing.net/apple-touch-icon.png">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Feedback | Brian's Plumbing, Libby, MT">
+<meta name="twitter:description" content="Share feedback about your service experience with Brian's Plumbing.">
+<meta name="twitter:image" content="https://www.briansplumbing.net/apple-touch-icon.png">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <svg class="brand-logo-img" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#0c1e30"/>
+        <path d="M32 14c-8 9-13 15.5-13 21.5A13 13 0 0 0 32 48.5a13 13 0 0 0 13-13C45 29.5 40 23 32 14z" fill="#cfe0ea"/>
+        <circle cx="32" cy="35.5" r="4.2" fill="#a8511f"/>
+      </svg>
+      <span>
+        <span class="brand-name">Brian's Plumbing</span>
+        <span class="brand-sub">Heating &amp; Mechanical</span>
+      </span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="services.html">Services</a>
+      <a href="index.html#service-areas">Service Areas</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="tel:+12064272219" class="call-btn" onclick="trackCall('header_phone_button')">Call (206) 427-2219</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Feedback</div>
+      <h1>Share Your Feedback</h1>
+      <p>Already a customer? Let me know how the job went.</p>
+    </div>
+  </section>
+
+  <section class="contact-form-section">
+    <div class="container">
+      <h2 class="section-title">Feedback Form</h2>
+      <p class="section-sub">Your feedback helps me keep improving the service I provide to Libby and Lincoln County.</p>
+      <form class="contact-form" name="feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="feedbackFormEl">
+        <input type="hidden" name="form-name" value="feedback">
+        <p class="hidden-field" aria-hidden="true">
+          <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+        <div class="form-group">
+          <label for="feedback-name">Name</label>
+          <input type="text" id="feedback-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="feedback-email">Email</label>
+          <input type="email" id="feedback-email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="feedback-service">Service Received</label>
+          <input type="text" id="feedback-service" name="service" placeholder="e.g. Water heater replacement">
+        </div>
+        <div class="form-group">
+          <label for="feedback-message">Feedback</label>
+          <textarea id="feedback-message" name="message" rows="5" placeholder="Tell me about your experience." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Send Feedback</button>
+      </form>
+      <p class="form-status" id="feedbackFormStatus" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Brian's Plumbing</div>
+      <div class="footer-nap">
+        Heating &amp; Mechanical<br>
+        148 Manor Dr, Libby, MT 59923<br>
+        <a href="tel:+12064272219">(206) 427-2219</a><br>
+        Mon&ndash;Fri 8am&ndash;5pm &middot; Emergency calls 24/7
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <nav class="footer-sitemap" aria-label="Service links">
+        <a href="services.html">All Services</a>
+        <a href="plumbing-repair-installation.html">Plumbing Repair</a>
+        <a href="water-heater-services.html">Water Heaters</a>
+        <a href="heating-furnace-services.html">Heating &amp; Furnace</a>
+        <a href="emergency-plumbing.html">Emergency Plumbing</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <h4>Service Areas</h4>
+      <nav class="footer-sitemap" aria-label="Location links">
+        <a href="index.html">Libby, MT</a>
+        <a href="plumber-troy-mt.html">Troy, MT</a>
+        <a href="plumber-yaak-mt.html">Yaak, MT</a>
+        <a href="plumber-trego-mt.html">Trego, MT</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="feedback.html">Feedback</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; <span id="year"></span> Brian's Plumbing, Heating &amp; Mechanical. All rights reserved.
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
