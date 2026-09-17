@@ -14,6 +14,19 @@ mainNav.querySelectorAll('a').forEach(function (link) {
 var yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+// Fade the header/nav in once the user scrolls down
+var siteHeader = document.querySelector('.site-header');
+function updateHeaderVisibility() {
+  if (window.scrollY > 80) {
+    siteHeader.classList.add('visible');
+  } else {
+    siteHeader.classList.remove('visible');
+    mainNav.classList.remove('open');
+  }
+}
+window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
+updateHeaderVisibility();
+
 // GA4 event tracking
 function trackCall(label) {
   if (typeof gtag === 'function') {
