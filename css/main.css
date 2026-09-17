@@ -1,21 +1,22 @@
-/* Brian's Plumbing, Heating & Mechanical — palette: navy (trust, water) + copper (pipe/heat accent) */
+/* Brian's Plumbing & Heating — palette matched to the logo: charcoal script + red-to-orange gradient */
 :root {
-  --navy: #15304a;
-  --navy-dark: #0c1e30;
-  --navy-mid: #1f4a6e;
-  --navy-pale: #e7eef3;
-  --steel: #4a7a9b;
-  --steel-light: #cfe0ea;
-  --copper: #a8511f;
-  --copper-deep: #7c3b14;
-  --copper-pale: #f3e2d3;
-  --bg: #f6f9fa;
+  --navy: #2a2724;
+  --navy-dark: #181614;
+  --navy-mid: #6e2015;
+  --navy-pale: #f7ede1;
+  --steel: #e2861f;
+  --steel-light: #f2cfa0;
+  --copper: #c0392b;
+  --copper-deep: #7a1f14;
+  --copper-pale: #f8ddc8;
+  --bg: #faf6f1;
   --card: #ffffff;
-  --ink: #1c2b36;
-  --ink-muted: #52646d;
-  --border: #dde5ea;
-  --star: #d9a441;
+  --ink: #241f1c;
+  --ink-muted: #5c5450;
+  --border: #e6ddd2;
+  --star: #d9821f;
   --success: #2e7d4f;
+  --brand-gradient: linear-gradient(90deg, #8f1c17 0%, #c0392b 35%, #d9631f 68%, #e2861f 100%);
 }
 
 * { box-sizing: border-box; }
@@ -51,6 +52,12 @@ header.site-header {
   z-index: 50;
   box-shadow: 0 2px 14px rgba(0,0,0,0.18);
 }
+header.site-header::after {
+  content: "";
+  display: block;
+  height: 3px;
+  background: var(--brand-gradient);
+}
 .header-inner {
   display: flex;
   align-items: center;
@@ -71,15 +78,24 @@ header.site-header {
   min-width: 0;
   overflow: hidden;
 }
-.brand-logo-img { height: 42px; width: 42px; flex: 0 0 auto; }
-.brand .brand-name { font-family: "Merriweather", Georgia, serif; font-weight: 700; font-size: 1.15rem; line-height: 1.1; color: #fff; }
+.brand-lockup { display: flex; flex-direction: column; line-height: 1; }
+.brand-script {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 0.95;
+  color: #f4ede4;
+  text-shadow: 0 0 1px #d9631f, 1px 1px 0 #c0392b;
+}
 .brand .brand-sub {
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
+  font-size: 0.4rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--steel-light);
-  font-family: "Inter", sans-serif;
+  font-family: "Merriweather", Georgia, serif;
+  font-weight: 700;
   display: block;
+  margin-top: 3px;
 }
 .nav-toggle {
   display: none;
@@ -101,7 +117,7 @@ nav.main-nav a {
 }
 nav.main-nav a:hover { color: #fff; }
 .call-btn {
-  background: var(--copper);
+  background: var(--brand-gradient);
   color: #fff !important;
   padding: 9px 18px;
   border-radius: 6px;
@@ -163,7 +179,7 @@ nav.main-nav a:hover { color: #fff; }
 .hero .subhead { font-size: 1.08rem; color: #dbe6ec; margin: 0 0 26px; max-width: 620px; }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
 .btn-primary {
-  background: var(--copper);
+  background: var(--brand-gradient);
   color: #fff;
   padding: 13px 26px;
   border-radius: 6px;
@@ -208,7 +224,7 @@ section { padding: 56px 20px; }
 .section-sub { text-align: center; color: var(--ink-muted); max-width: 680px; margin: 0 auto 36px; }
 
 .mini-cta {
-  background: var(--copper);
+  background: var(--brand-gradient);
   color: #fff;
   padding: 30px 20px;
   text-align: center;
@@ -337,9 +353,9 @@ section { padding: 56px 20px; }
 .contact-info-card a { text-decoration: underline; color: var(--copper-deep); font-weight: 600; }
 
 /* Footer */
-footer.site-footer { background: var(--navy-dark); color: #cfe0ea; padding: 46px 20px 24px; }
-.footer-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 30px; }
-.footer-brand { font-family: "Merriweather", serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
+footer.site-footer { background: var(--navy-dark); color: #f2cfa0; padding: 4px 20px 24px; border-top: 3px solid; border-image: var(--brand-gradient) 1; }
+.footer-inner { max-width: 1120px; margin: 42px auto 0; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 30px; }
+.footer-brand { font-family: "Dancing Script", cursive; font-weight: 700; font-size: 1.7rem; color: #f4ede4; margin-bottom: 10px; line-height: 1; }
 .footer-nap a { color: #cfe0ea; text-decoration: none; }
 .footer-nap a:hover { text-decoration: underline; }
 .footer-sitemap { display: flex; flex-direction: column; gap: 8px; }
