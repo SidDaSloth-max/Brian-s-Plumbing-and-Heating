@@ -43,14 +43,14 @@ a { color: inherit; }
   font-weight: 600;
 }
 
-/* Header */
+/* Header — light, to match the logo artwork's white background */
 header.site-header {
-  background: var(--navy-dark);
-  color: #fff;
+  background: #ffffff;
+  color: var(--ink);
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: 0 2px 14px rgba(0,0,0,0.18);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.08);
 }
 header.site-header::after {
   content: "";
@@ -73,49 +73,33 @@ header.site-header::after {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: #fff;
+  color: var(--ink);
   white-space: nowrap;
   min-width: 0;
   overflow: hidden;
 }
-.brand-lockup { display: flex; flex-direction: column; line-height: 1; }
-.brand-script {
-  font-family: "Dancing Script", cursive;
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 0.95;
-  color: #f4ede4;
-  text-shadow: 0 0 1px #d9631f, 1px 1px 0 #c0392b;
-}
-.brand .brand-sub {
-  font-size: 0.4rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--steel-light);
-  font-family: "Merriweather", Georgia, serif;
-  font-weight: 700;
-  display: block;
-  margin-top: 3px;
-}
+.brand-lockup { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
+.brand-logo-brians { height: 44px; width: auto; display: block; }
+.brand-logo-sub { height: 20px; width: auto; display: block; margin: 4px 0 0 2px; }
 .nav-toggle {
   display: none;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--ink);
   font-size: 1.6rem;
   cursor: pointer;
   padding: 4px 8px;
 }
 nav.main-nav { display: flex; gap: 18px; align-items: center; }
 nav.main-nav a {
-  color: #dbe6ec;
+  color: var(--ink);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.93rem;
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
-nav.main-nav a:hover { color: #fff; }
+nav.main-nav a:hover { color: var(--copper-deep); }
 .call-btn {
   background: var(--brand-gradient);
   color: #fff !important;
@@ -136,15 +120,15 @@ nav.main-nav a:hover { color: #fff; }
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--navy-dark);
+    background: #ffffff;
     flex-direction: column;
     align-items: stretch;
     padding: 10px 20px 18px;
     gap: 2px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   }
   nav.main-nav.open { display: flex; }
-  nav.main-nav a { padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  nav.main-nav a { padding: 10px 4px; border-bottom: 1px solid var(--border); }
   .call-btn { text-align: center; margin-top: 8px; }
 }
 
@@ -355,7 +339,7 @@ section { padding: 56px 20px; }
 /* Footer */
 footer.site-footer { background: var(--navy-dark); color: #f2cfa0; padding: 4px 20px 24px; border-top: 3px solid; border-image: var(--brand-gradient) 1; }
 .footer-inner { max-width: 1120px; margin: 42px auto 0; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 30px; }
-.footer-brand { font-family: "Dancing Script", cursive; font-weight: 700; font-size: 1.7rem; color: #f4ede4; margin-bottom: 10px; line-height: 1; }
+.footer-logo { height: 48px; width: auto; margin-bottom: 12px; }
 .footer-nap a { color: #cfe0ea; text-decoration: none; }
 .footer-nap a:hover { text-decoration: underline; }
 .footer-sitemap { display: flex; flex-direction: column; gap: 8px; }
