@@ -111,8 +111,9 @@ function initReviewCarousel() {
 
   var startIndex = 0;
   var visibleCount = 3;
+  var animating = false;
 
-  function render() {
+  function renderCards() {
     track.innerHTML = '';
     for (var i = 0; i < visibleCount; i++) {
       var r = YELP_REVIEWS[(startIndex + i) % YELP_REVIEWS.length];
@@ -127,16 +128,35 @@ function initReviewCarousel() {
     }
   }
 
-  prev.addEventListener('click', function () {
-    startIndex = (startIndex - 1 + YELP_REVIEWS.length) % YELP_REVIEWS.length;
-    render();
-  });
-  next.addEventListener('click', function () {
-    startIndex = (startIndex + 1) % YELP_REVIEWS.length;
-    render();
-  });
+  function slide(direction) {
+    if (animating) return;
+    animating = true;
+    var outClass = direction === 'next' ? 'review-slide-out-left' : 'review-slide-out-right';
+    var inClass = direction === 'next' ? 'review-slide-out-right' : 'review-slide-out-left';
 
-  render();
+    track.classList.add(outClass);
+    setTimeout(function () {
+      startIndex = direction === 'next'
+        ? (startIndex + 1) % YELP_REVIEWS.length
+        : (startIndex - 1 + YELP_REVIEWS.length) % YELP_REVIEWS.length;
+      renderCards();
+      track.classList.remove(outClass);
+      track.classList.add(inClass);
+      // eslint-disable-next-line no-unused-expressions
+      track.offsetHeight; // force reflow so the next class change transitions
+      track.classList.remove(inClass);
+      track.classList.add('review-slide-in');
+      setTimeout(function () {
+        track.classList.remove('review-slide-in');
+        animating = false;
+      }, 400);
+    }, 400);
+  }
+
+  prev.addEventListener('click', function () { slide('prev'); });
+  next.addEventListener('click', function () { slide('next'); });
+
+  renderCards();
 }
 
 // Gallery carousel prev/next
