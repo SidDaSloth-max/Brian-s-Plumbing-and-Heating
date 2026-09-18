@@ -237,7 +237,14 @@ section { padding: 56px 20px; }
 .trust-item span { font-size: 0.78rem; color: var(--ink-muted); }
 
 /* Services grid */
-.services-section { background: var(--card); }
+.services-section {
+  position: relative;
+  background:
+    linear-gradient(rgba(18, 16, 14, 0.87), rgba(18, 16, 14, 0.87)),
+    url('../images/services-bg.jpg') center / cover no-repeat;
+}
+.services-section .section-title { color: #fff; }
+.services-section .section-sub { color: #e8d9c8; }
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
 .service-card {
   background: var(--bg);
