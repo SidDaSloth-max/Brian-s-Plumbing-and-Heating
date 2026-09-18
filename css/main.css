@@ -55,7 +55,7 @@ header.site-header {
   opacity: 0;
   transform: translateY(-8px);
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 header.site-header.visible {
   opacity: 1;
