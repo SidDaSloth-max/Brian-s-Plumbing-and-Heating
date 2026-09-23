@@ -105,58 +105,120 @@ var YELP_URL = 'https://www.yelp.com/biz/brians-plumbing-and-heating-libby-2';
 
 function initReviewCarousel() {
   var track = document.getElementById('reviewTrack');
-  var prev = document.getElementById('reviewPrev');
-  var next = document.getElementById('reviewNext');
-  if (!track || !prev || !next) return;
+  if (!track) return;
 
+  var mq = window.matchMedia('(max-width: 700px)');
   var startIndex = 0;
-  var visibleCount = 3;
   var animating = false;
+  var vis = mq.matches ? 1 : 3;
+  var total = YELP_REVIEWS.length;
+  var FIRST = -2; // cards rendered from offset -2 .. vis+1; offsets <0 and >=vis are faded "peek" cards
 
-  function renderCards() {
+  function wrap(i) { return ((i % total) + total) % total; }
+
+  function buildCard(offset) {
+    var r = YELP_REVIEWS[wrap(startIndex + offset)];
+    var card = document.createElement('div');
+    card.className = 'review-quote';
+    card.setAttribute('data-offset', offset);
+    card.innerHTML =
+      '<div class="quote-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
+      '<p>&ldquo;' + r.quote + '&rdquo;</p>' +
+      '<div class="reviewer">&mdash; ' + r.name + ', ' + r.location + '</div>' +
+      '<a class="review-link" href="' + YELP_URL + '" target="_blank" rel="noopener" onclick="trackOutbound(\'review_card_yelp_link\')">Read full review on Yelp &rarr;</a>';
+    return card;
+  }
+
+  function setPeek(card, offset) {
+    var peek = offset < 0 || offset >= vis;
+    card.classList.toggle('review-peek', peek);
+    var link = card.querySelector('.review-link');
+    if (link) link.tabIndex = peek ? -1 : 0;
+    if (peek) {
+      card.setAttribute('role', 'button');
+      card.tabIndex = (offset === -1 || offset === vis) ? 0 : -1;
+      card.setAttribute('aria-label', offset < 0 ? 'Show earlier reviews' : 'Show more reviews');
+    } else {
+      card.removeAttribute('role');
+      card.removeAttribute('tabindex');
+      card.removeAttribute('aria-label');
+    }
+  }
+
+  function step() {
+    var cards = track.children;
+    return cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 0;
+  }
+
+  function setTransform(px, animate) {
+    track.style.transition = animate ? 'transform 0.55s ease' : 'none';
+    track.style.transform = 'translateX(' + px + 'px)';
+  }
+
+  function render() {
     track.innerHTML = '';
-    for (var i = 0; i < visibleCount; i++) {
-      var r = YELP_REVIEWS[(startIndex + i) % YELP_REVIEWS.length];
-      var card = document.createElement('div');
-      card.className = 'review-quote';
-      card.innerHTML =
-        '<div class="quote-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
-        '<p>&ldquo;' + r.quote + '&rdquo;</p>' +
-        '<div class="reviewer">&mdash; ' + r.name + ', ' + r.location + '</div>' +
-        '<a class="review-link" href="' + YELP_URL + '" target="_blank" rel="noopener" onclick="trackOutbound(\'review_card_yelp_link\')">Read full review on Yelp &rarr;</a>';
+    for (var o = FIRST; o <= vis + 1; o++) {
+      var card = buildCard(o);
+      setPeek(card, o);
       track.appendChild(card);
     }
+    setTransform(-step(), false);
   }
 
   function slide(direction) {
     if (animating) return;
     animating = true;
-    var outClass = direction === 'next' ? 'review-slide-out-left' : 'review-slide-out-right';
-    var inClass = direction === 'next' ? 'review-slide-out-right' : 'review-slide-out-left';
-
-    track.classList.add(outClass);
+    var s = step();
+    var cards = track.children;
+    var i;
+    // Fade cards to their post-slide state while the track moves
+    for (i = 0; i < cards.length; i++) {
+      var off = FIRST + i;
+      var newOff = direction === 'next' ? off - 1 : off + 1;
+      var peek = newOff < 0 || newOff >= vis;
+      cards[i].classList.toggle('review-peek', peek);
+    }
+    setTransform(direction === 'next' ? -2 * s : 0, true);
     setTimeout(function () {
-      startIndex = direction === 'next'
-        ? (startIndex + 1) % YELP_REVIEWS.length
-        : (startIndex - 1 + YELP_REVIEWS.length) % YELP_REVIEWS.length;
-      renderCards();
-      track.classList.remove(outClass);
-      track.classList.add(inClass);
-      // eslint-disable-next-line no-unused-expressions
-      track.offsetHeight; // force reflow so the next class change transitions
-      track.classList.remove(inClass);
-      track.classList.add('review-slide-in');
-      setTimeout(function () {
-        track.classList.remove('review-slide-in');
-        animating = false;
-      }, 400);
-    }, 400);
+      startIndex = wrap(startIndex + (direction === 'next' ? 1 : -1));
+      render();
+      animating = false;
+    }, 580);
   }
 
-  prev.addEventListener('click', function () { slide('prev'); });
-  next.addEventListener('click', function () { slide('next'); });
+  track.addEventListener('click', function (e) {
+    var card = e.target.closest ? e.target.closest('.review-peek') : null;
+    if (!card) return;
+    var off = parseInt(card.getAttribute('data-offset'), 10);
+    slide(off < 0 ? 'prev' : 'next');
+  });
+  track.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var card = e.target.closest ? e.target.closest('.review-peek') : null;
+    if (!card) return;
+    e.preventDefault();
+    slide(parseInt(card.getAttribute('data-offset'), 10) < 0 ? 'prev' : 'next');
+  });
 
-  renderCards();
+  var lastWidth = 0;
+  function onResize() {
+    var viewport = track.parentNode;
+    var width = viewport.clientWidth;
+    var newVis = mq.matches ? 1 : 3;
+    if (animating) return;
+    if (width === lastWidth && newVis === vis) return;
+    lastWidth = width;
+    vis = newVis;
+    render();
+  }
+  if (window.ResizeObserver) {
+    new ResizeObserver(onResize).observe(track.parentNode);
+  } else {
+    window.addEventListener('resize', onResize);
+  }
+
+  render();
+  lastWidth = track.parentNode.clientWidth;
 }
 
 // Gallery carousel prev/next
