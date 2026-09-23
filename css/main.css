@@ -482,6 +482,7 @@ footer.site-footer { background: var(--navy-dark); color: #f2cfa0; padding: 4px 
 .social-icons svg { width: 18px; height: 18px; fill: #fff; }
 .social-icons a.icon-fb { background-color: #1877f2; }
 .social-icons a.icon-yelp { background-color: #d32323; }
+.social-icons a.icon-yelp svg { width: 24px; height: 24px; }
 .social-icons a.icon-nextdoor { background-color: #8ed500; }
 .social-icons a.icon-mapquest { background-color: #e2231a; }
 .social-icons a.icon-linkedin { background-color: #0a66c2; }
