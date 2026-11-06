@@ -135,6 +135,7 @@ function initReviewCarousel() {
   var animating = false;
   var vis = mq.matches ? 1 : 3;
   var total = YELP_REVIEWS.length;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var FIRST = -2; // cards rendered from offset -2 .. vis+1; offsets <0 and >=vis are faded "peek" cards
 
   function wrap(i) { return ((i % total) + total) % total; }
@@ -206,7 +207,7 @@ function initReviewCarousel() {
       startIndex = wrap(startIndex + (direction === 'next' ? 1 : -1));
       render();
       animating = false;
-    }, 580);
+    }, reduceMotion ? 0 : 580);
   }
 
   track.addEventListener('click', function (e) {
@@ -215,6 +216,15 @@ function initReviewCarousel() {
     var off = parseInt(card.getAttribute('data-offset'), 10);
     slide(off < 0 ? 'prev' : 'next');
   });
+  // Swipe left/right on touch screens
+  var touchX = null;
+  track.addEventListener("touchstart", function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener("touchend", function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (Math.abs(dx) > 40) slide(dx < 0 ? "next" : "prev");
+  }, { passive: true });
   track.addEventListener('keydown', function (e) {
     if (e.key !== 'Enter' && e.key !== ' ') return;
     var card = e.target.closest ? e.target.closest('.review-peek') : null;
@@ -251,15 +261,63 @@ function initGalleryCarousel() {
   var next = document.getElementById('carouselNext');
   if (!track || !prev || !next) return;
 
+  var real = Array.prototype.slice.call(track.children);
+  var count = real.length;
+  if (count < 2) {
+    prev.hidden = true;
+    next.hidden = true;
+    return;
+  }
+
+  // Infinite loop: a clone of the last slide sits before the first, and a clone
+  // of the first sits after the last. Landing on a clone jumps (invisibly) to
+  // the matching real slide.
+  function makeClone(slide) {
+    var c = slide.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    var img = c.querySelector('img');
+    if (img) { img.setAttribute('loading', 'eager'); img.setAttribute('alt', ''); }
+    return c;
+  }
+  track.insertBefore(makeClone(real[count - 1]), real[0]);
+  track.appendChild(makeClone(real[0]));
+
   function step() {
     return track.clientWidth;
   }
+  function jumpTo(index) {
+    track.style.scrollBehavior = 'auto';
+    track.style.scrollSnapType = 'none';
+    track.scrollLeft = index * step();
+    requestAnimationFrame(function () {
+      track.style.scrollSnapType = '';
+      track.style.scrollBehavior = '';
+    });
+  }
+  function settle() {
+    var index = Math.round(track.scrollLeft / step());
+    if (index <= 0) jumpTo(count);
+    else if (index >= count + 1) jumpTo(1);
+  }
+
+  var timer;
+  track.addEventListener('scroll', function () {
+    clearTimeout(timer);
+    timer = setTimeout(settle, 120);
+  }, { passive: true });
+  window.addEventListener('resize', function () {
+    var index = Math.min(Math.max(Math.round(track.scrollLeft / step()), 1), count);
+    jumpTo(index);
+  });
+
   prev.addEventListener('click', function () {
-    track.scrollBy({ left: -step(), behavior: 'smooth' });
+    track.scrollBy({ left: -step(), behavior: (window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth") });
   });
   next.addEventListener('click', function () {
-    track.scrollBy({ left: step(), behavior: 'smooth' });
+    track.scrollBy({ left: step(), behavior: (window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth") });
   });
+
+  jumpTo(1);
 }
 
 function initAll() {

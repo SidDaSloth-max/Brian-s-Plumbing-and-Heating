@@ -15,3 +15,15 @@
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+/favicon.ico
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/images/og-share.jpg
+  Cache-Control: public, max-age=86400, must-revalidate
