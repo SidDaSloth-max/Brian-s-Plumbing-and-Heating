@@ -1,3 +1,4 @@
+var PAGE_LOADED_AT = Date.now();
 // Mobile nav toggle
 var navToggle = document.getElementById('navToggle');
 var mainNav = document.getElementById('mainNav');
@@ -42,7 +43,7 @@ function trackOutbound(label) {
 
 function trackFormSubmit(label) {
   if (typeof gtag === 'function') {
-    gtag('event', 'form_submit', { event_category: 'engagement', event_label: label });
+    gtag('event', 'generate_lead', { event_category: 'engagement', event_label: label });
   }
 }
 
@@ -52,9 +53,31 @@ function initNetlifyForm(formId, statusId, successMessage, failureMessage) {
   var status = document.getElementById(statusId);
   if (!form || !status) return;
 
+  // Spam guard: bots usually fill and submit instantly without ever touching the
+  // form. Require a real interaction and a few seconds on the page.
+  var interacted = false;
+  ['keydown', 'input', 'change', 'pointerdown', 'touchstart'].forEach(function (evt) {
+    form.addEventListener(evt, function () { interacted = true; }, { passive: true, once: true });
+  });
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var submitBtn = form.querySelector('button[type="submit"]');
+
+    // Honeypot filled in: act as if it worked, but don't send it (saves form quota).
+    var trap = form.querySelector('input[name="bot-field"]');
+    if (trap && trap.value) {
+      form.style.display = 'none';
+      status.textContent = successMessage;
+      status.className = 'form-status success';
+      return;
+    }
+    if (!interacted || Date.now() - PAGE_LOADED_AT < 3000) {
+      status.textContent = 'Please review your details and press the button again.';
+      status.className = 'form-status error';
+      return;
+    }
+
     var originalText = submitBtn.textContent;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
