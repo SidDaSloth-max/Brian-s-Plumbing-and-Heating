@@ -7,8 +7,6 @@
 /images/*
   Cache-Control: public, max-age=300, must-revalidate
 
-/favicon.svg
-  Cache-Control: public, max-age=86400, must-revalidate
 
 /apple-touch-icon.png
   Cache-Control: public, max-age=86400, must-revalidate
@@ -26,4 +24,7 @@
   Cache-Control: public, max-age=86400, must-revalidate
 
 /images/og-share.jpg
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/images/favicon-32.png
   Cache-Control: public, max-age=86400, must-revalidate
